@@ -1,0 +1,10 @@
+{
+    "name": "Disable Gestures Wayland",
+    "description": "Completely disables all touchpad gestures in GNOME Shell on Wayland - YES, including the 3-finger swipes!",
+    "uuid": "disable-gestures-wayland@zonetra",
+    "shell-version": [
+        "42", "43", "44"
+    ],
+    "url": "https://github.com/csaladenes/disable-gestures-wayland",
+    "version": 1
+} 

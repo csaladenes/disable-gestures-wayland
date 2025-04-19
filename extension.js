@@ -1,0 +1,63 @@
+/* extension.js
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+/* exported init */
+
+const Main = imports.ui.main;
+
+class Extension {
+  constructor() {}
+
+  enable() {
+    this._swipeMods = [
+      Main.overview._swipeTracker._touchpadGesture,
+      Main.wm._workspaceAnimation._swipeTracker._touchpadGesture,
+      Main.overview._overview._controls._workspacesDisplay._swipeTracker._touchpadGesture,
+    ];
+
+    this._swipeMods.forEach((g) => {
+      g._newHandleEvent = (actor, event) => {
+        // Block all gestures by returning false
+        return false;
+      };
+
+      global.stage.disconnectObject(g);
+      global.stage.connectObject(
+        'captured-event::touchpad',
+        g._newHandleEvent.bind(g),
+        g
+      );
+    });
+  }
+
+  disable() {
+    this._swipeMods.forEach((g) => {
+      global.stage.disconnectObject(g);
+      global.stage.connectObject(
+        'captured-event::touchpad',
+        g._handleEvent.bind(g),
+        g
+      );
+    });
+    this._swipeMods = [];
+  }
+}
+
+function init() {
+  return new Extension();
+} 
