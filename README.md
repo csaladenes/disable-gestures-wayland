@@ -1,8 +1,8 @@
 # Disable Gestures Wayland
 
 A GNOME Shell extension that completely disables all touchpad gestures on Wayland.  
-Inspired by the approach taken on `https://extensions.gnome.org/extension/5233/swap-finger-gestures-3-to-4/`  
-by `https://github.com/icedman/swap-finger-gestures-3-4`
+Inspired by the approach taken on https://extensions.gnome.org/extension/5233/swap-finger-gestures-3-to-4/  
+by https://github.com/icedman/swap-finger-gestures-3-4
 
 ## Features
 
